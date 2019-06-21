@@ -55,20 +55,20 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export TAG_SUFFIX=$(date +%Y%m%d%H%M%S)" >> $BASH_ENV
-            echo 'export IMAGE="countdowntogether/cdt-web:${CIRCLE_BRANCH}-${TAG_SUFFIX}"' >> $BASH_ENV
+            echo 'export IMAGE="eightwelve/cdt-web:${CIRCLE_BRANCH}-${TAG_SUFFIX}"' >> $BASH_ENV
       - run:
           name: Publish docker image
           command: |
             docker image build -t $IMAGE .
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
             docker push $IMAGE
-    # - add_ssh_keys:
-    #     fingerprints:
-    #     - "80:2d:9c:70:d7:07:3f:fc:25:8d:b1:ed:4b:cd:96:73"
-    # - run:
-    #     name: Deploy app to server via Docker
-    #     command: |
-    #       echo 'ssh -o StrictHostKeyChecking=no cdt@cdt.com "/bin/bash ./deploy_app.sh ${IMAGE}"'
+      - add_ssh_keys:
+          fingerprints:
+            - "77:9c:f7:e2:0f:12:87:82:63:0f:87:ef:80:cd:93:96"
+      - run:
+          name: Deploy app to server
+          command: |
+            ssh -o StrictHostKeyChecking=no ${DEPLOYMENT_USER}@${SERVER} "/bin/bash ./deploy_app.sh ${IMAGE}"
 
 workflows:
   version: 2
