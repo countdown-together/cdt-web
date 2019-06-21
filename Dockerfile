@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:11.1-alpine
 
 EXPOSE 3000
 
@@ -6,6 +6,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install
+RUN npm install -g serve
 
-CMD npm start
+RUN npm install --silent
+
+RUN chmod +x /app/run
+
+CMD ["/app/run"]
