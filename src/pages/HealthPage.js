@@ -4,12 +4,7 @@ import "./../App.css";
 
 function HealthPage() {
   return (
-    <Health
-      endpoint={process.env.REACT_APP_API_ENDPOINT}
-      header="Backend API Connection"
-      path="actuator/health"
-      tag="be"
-    />
+    <Health header="Backend API Connection" path="actuator/health" tag="be" />
   );
 }
 
