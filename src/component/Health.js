@@ -14,7 +14,7 @@ class Health extends Component {
   }
 
   componentWillMount() {
-    health(this.props.endpoint, this.props.path)
+    health(this.props.path)
       .then(response => {
         this.setState({
           status: response.status,
@@ -55,7 +55,6 @@ class Health extends Component {
 Health.propTypes = {
   path: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
-  endpoint: PropTypes.string.isRequired,
   tag: PropTypes.string
 };
 
