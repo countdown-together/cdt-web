@@ -22,7 +22,7 @@ export default class Navbar extends Component {
           </Menu.Item>
         </Link>
 
-        <Link to="/health">
+        <Link to="/misc/health">
           <Menu.Item
             name="health"
             active={activeItem === "health"}
