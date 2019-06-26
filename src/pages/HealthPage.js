@@ -8,6 +8,7 @@ function HealthPage() {
       endpoint={process.env.REACT_APP_API_ENDPOINT}
       header="Backend API Connection"
       path="actuator/health"
+      tag="be"
     />
   );
 }

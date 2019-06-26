@@ -17,7 +17,7 @@ class Health extends Component {
     health(this.props.endpoint, this.props.path)
       .then(response => {
         this.setState({
-          status: response.status || "UP",
+          status: response.status,
           icon: <Icon name="heart" color="green" />
         });
       })
@@ -30,12 +30,22 @@ class Health extends Component {
   }
 
   render() {
+    let statusField;
+    if (this.props.tag) {
+      statusField = (
+        <span id={this.props.tag + "-health-indicator"}>
+          status: {this.state.status}
+        </span>
+      );
+    } else {
+      statusField = <span>status: {this.state.status}</span>;
+    }
     return (
       <Message icon>
         {this.state.icon}
         <Message.Content>
           <Message.Header>{this.props.header}</Message.Header>
-          {this.state.status}
+          {statusField}
         </Message.Content>
       </Message>
     );
@@ -45,7 +55,8 @@ class Health extends Component {
 Health.propTypes = {
   path: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
-  endpoint: PropTypes.string.isRequired
+  endpoint: PropTypes.string.isRequired,
+  tag: PropTypes.string
 };
 
 export default Health;
