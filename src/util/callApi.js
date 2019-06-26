@@ -8,12 +8,13 @@ function sanitizeUri(endpoint) {
  * Inspect the response.status number within the resolved callback to add conditional handling of server errors to your code.
  */
 export default function callApi({
+  api_endpoint = process.env.REACT_APP_API_ENDPOINT,
   uri,
   method = "GET",
   body = undefined,
   headers
 }) {
-  let endpoint = process.env.REACT_APP_API_ENDPOINT + sanitizeUri(uri);
+  let endpoint = api_endpoint + sanitizeUri(uri);
   console.log("calling endpoint: ", endpoint);
 
   return fetch(endpoint, {

@@ -3,7 +3,13 @@ import Health from "./../component/Health";
 import "./../App.css";
 
 function HealthPage() {
-  return <Health />;
+  return (
+    <Health
+      endpoint={process.env.REACT_APP_API_ENDPOINT}
+      header="Backend API Connection"
+      path="actuator/health"
+    />
+  );
 }
 
 export default HealthPage;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { health } from "../util/apiCalls";
 import { Icon, Message } from "semantic-ui-react";
+import PropTypes from "prop-types";
 
 class Health extends Component {
   constructor(props) {
@@ -13,10 +14,10 @@ class Health extends Component {
   }
 
   componentWillMount() {
-    health()
+    health(this.props.endpoint, this.props.path)
       .then(response => {
         this.setState({
-          status: response.status,
+          status: response.status || "UP",
           icon: <Icon name="heart" color="green" />
         });
       })
@@ -33,12 +34,18 @@ class Health extends Component {
       <Message icon>
         {this.state.icon}
         <Message.Content>
-          <Message.Header>Backend API connection</Message.Header>
+          <Message.Header>{this.props.header}</Message.Header>
           {this.state.status}
         </Message.Content>
       </Message>
     );
   }
 }
+
+Health.propTypes = {
+  path: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
+  endpoint: PropTypes.string.isRequired
+};
 
 export default Health;
