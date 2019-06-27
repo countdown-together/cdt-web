@@ -1,17 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Health from "./component/Health";
+import Navbar from "./component/Navbar";
+import HealthPage from "./pages/HealthPage";
+import HomePage from "./pages/HomePage";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello world, let's countdown together.</p>
-        <Health />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/misc/health" component={HealthPage} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

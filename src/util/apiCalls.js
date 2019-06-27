@@ -1,8 +1,8 @@
 import callApi from "./callApi";
 
-export function health() {
+export function health(path) {
   return callApi({
-    uri: "/actuator/health",
+    uri: path,
     method: "GET"
   });
 }
